@@ -86,6 +86,11 @@ res.send(result)
         result
       )
     })
+
+     app.get('/latest-properties',async(req,res)=>{
+      const result=await propertiesCollection.find().sort({postedAt:'desc'}).limit(6).toArray()
+      res.send(result)
+    })
     
 
 
