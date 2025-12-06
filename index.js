@@ -21,6 +21,18 @@ async function run() {
   try {
     
     await client.connect();
+    const db=client.db('HomeNest')
+    const propertiesCollection=db.collection('Properties')
+
+    app.get('/properties',async(req,res)=>{
+      const result=await propertiesCollection.find().toArray()
+      res.send(result)
+    })
+
+
+
+
+
     
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
@@ -38,3 +50,26 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *   #2563EB
+ *    #1E40AF
+ *    #F1F5F9
+ * #FACC15
+ * #0F172A
+ * #0d1a45
+ * 
+ * 
+ * 
+ */
