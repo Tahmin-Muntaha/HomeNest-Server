@@ -34,6 +34,12 @@ async function run() {
       const result=await propertiesCollection.insertOne(data)
       res.send(result)
     })
+    app.get('/my-properties',async(req,res)=>{
+      const email=req.query.email
+      const result=await propertiesCollection.find({
+userEmail:email}).toArray()
+      res.send(result)
+    })
     app.get('/properties/:id',async(req,res)=>{
       const {id}=req.params
       const result =await propertiesCollection.findOne({_id:new ObjectId(id)})
