@@ -29,6 +29,11 @@ async function run() {
       const result=await propertiesCollection.find().toArray()
       res.send(result)
     })
+    app.post('/properties',async(req,res)=>{
+      const data=req.body
+      const result=await propertiesCollection.insertOne(data)
+      res.send(result)
+    })
     app.get('/properties/:id',async(req,res)=>{
       const {id}=req.params
       const result =await propertiesCollection.findOne({_id:new ObjectId(id)})
@@ -48,6 +53,7 @@ rated_by:email}).toArray()
 res.send(result)
 
     })
+    
 
 
 
