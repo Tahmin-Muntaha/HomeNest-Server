@@ -5,7 +5,7 @@ const cors = require("cors");
 app.use(cors())
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://HomeNest:QHs4iimcxJlmuKHd@cluster.utdm4vq.mongodb.net/?appName=Cluster";
 
 
@@ -28,6 +28,12 @@ async function run() {
       const result=await propertiesCollection.find().toArray()
       res.send(result)
     })
+    app.get('/properties/:id',async(req,res)=>{
+      const {id}=req.params
+      const result =await propertiesCollection.findOne({_id:new ObjectId(id)})
+      res.send(result)
+    })
+
 
 
 
