@@ -69,11 +69,22 @@ res.send(result)
         $set:data
       }
       const result =await propertiesCollection.updateOne(filter,update)
-      res.send({
+      res.send(
         
         result
-      })
+      )
 
+      
+
+
+    })
+    app.delete('/properties/:id',async(req,res)=>{
+      const {id}=req.params
+      const result =await propertiesCollection.deleteOne({_id:new ObjectId(id)})
+      res.send(
+        
+        result
+      )
     })
     
 
