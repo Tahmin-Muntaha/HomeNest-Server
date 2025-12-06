@@ -91,6 +91,19 @@ res.send(result)
       const result=await propertiesCollection.find().sort({postedAt:'desc'}).limit(6).toArray()
       res.send(result)
     })
+
+    app.get('/search',async(req,res)=>{
+      const r=req.query.search
+      const result=await propertiesCollection.find({propertyName:{$regex:r,$options:'i'}}).toArray()
+      res.send(result)
+    })
+
+    app.get('/sort',async (req,res)=>{
+      const result=await propertiesCollection.find().sort({price
+:'asc'}).toArray()
+  res.send(result)
+
+    })
     
 
 
@@ -112,6 +125,8 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+
 
 
 
