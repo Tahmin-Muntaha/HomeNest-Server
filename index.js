@@ -59,6 +59,22 @@ rated_by:email}).toArray()
 res.send(result)
 
     })
+
+    app.put('/properties/:id',async(req,res)=>{
+      const {id}=req.params
+      const data=req.body
+      const objectId =new ObjectId(id)
+      const filter={_id:objectId}
+      const update={
+        $set:data
+      }
+      const result =await propertiesCollection.updateOne(filter,update)
+      res.send({
+        
+        result
+      })
+
+    })
     
 
 
