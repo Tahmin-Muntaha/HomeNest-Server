@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const cors = require("cors");
 app.use(cors())
-
+app.use(express.json())
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = "mongodb+srv://HomeNest:QHs4iimcxJlmuKHd@cluster.utdm4vq.mongodb.net/?appName=Cluster";
@@ -23,6 +23,7 @@ async function run() {
     await client.connect();
     const db=client.db('HomeNest')
     const propertiesCollection=db.collection('Properties')
+    const reviewsCollection=db.collection('MyReviews')
 
     app.get('/properties',async(req,res)=>{
       const result=await propertiesCollection.find().toArray()
@@ -34,8 +35,19 @@ async function run() {
       res.send(result)
     })
 
+    app.post('/reviews',async(req,res)=>{
+      const data=req.body
+      const result=await reviewsCollection.insertOne(data)
+      res.send(result)
+    })
 
+    app.get('/my-reviews/',async(req,res)=>{
+      const email=req.query.email
+      const result=await reviewsCollection.find({
+rated_by:email}).toArray()
+res.send(result)
 
+    })
 
 
 
